@@ -34,5 +34,14 @@ int main() {
 	delete d4;
 	cout << "class_id of demo5: " << d5->get_class_id() << endl;
 	delete d5;
+	
+
+
+	demo* da = new demo[2];
+	cout << da->get_class_id() << endl;
+
 	system("pause");
+
 }
+
+
