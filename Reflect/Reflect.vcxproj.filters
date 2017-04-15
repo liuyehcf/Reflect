@@ -15,22 +15,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="reflect.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="demo.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
+    <ClCompile Include="pattern2\object.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pattern2\main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pattern2\demo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="reflect.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="demo.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
+    <ClInclude Include="pattern2\object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pattern2\demo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pattern2\invoke.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

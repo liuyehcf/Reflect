@@ -18,6 +18,16 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pattern2\demo.cpp" />
+    <ClCompile Include="pattern2\main.cpp" />
+    <ClCompile Include="pattern2\object.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pattern2\demo.h" />
+    <ClInclude Include="pattern2\invoke.h" />
+    <ClInclude Include="pattern2\object.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8CA3A71F-69C8-4884-9E1D-16D2073CB574}</ProjectGuid>
     <RootNamespace>Reflect</RootNamespace>
@@ -109,15 +119,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="demo.h" />
-    <ClInclude Include="reflect.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="demo.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="reflect.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

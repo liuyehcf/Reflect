@@ -1,0 +1,10 @@
+#include"demo.h"
+#include<stdexcept>
+
+using namespace std;
+
+REGISTE_MEMBER_RESOURCE(demo)
+REGISTE_MEMBER_RESOURCE(demo2)
+REGISTE_MEMBER_RESOURCE(demo3)
+REGISTE_MEMBER_RESOURCE(demo4)
+REGISTE_MEMBER_RESOURCE(demo5)
