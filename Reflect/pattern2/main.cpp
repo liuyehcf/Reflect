@@ -6,42 +6,43 @@ using namespace std;
 
 
 int main() {
-	object *d1 = demo::new_instance();
-
-	invoke(d1, "set_age", 25);
-
-	invoke(d1, "func");
-
-	cout << ((demo*)d1)->get_age() << endl;
-
-	cout << "class_id of demo: " << d1->get_class_id() << endl;
-
-	delete d1;
+	object *d1 = demo1::new_instance();
+	object *d2 = demo2::new_instance();
+	object *d3 = demo3::new_instance();
 
 
-	object *d2 = new demo2();
-	object *d3 = new demo3();
-	object *d4 = new demo4();
-	object *d5 = new demo5();
+	invoke(d1, "set_age", 5);
+	invoke(d1, "set_time", 1000L);
+	invoke(d1, "set_woman", 1.5f);
+	invoke(d1, "set_man", 0.99);
 
-	cout << "class_id of demo2: " << d2->get_class_id() << endl;
-	delete d2;
-	cout << "class_id of demo3: " << d3->get_class_id() << endl;
-	delete d3;
-	cout << "class_id of demo4: " << d4->get_class_id() << endl;
-	invoke(d4, "add", 1, 2, 3, 4);
+	invoke(d1, "print_age");
+	invoke(d1, "print_time");
+	invoke(d1, "print_woman");
+	invoke(d1, "print_man");
 
-	delete d4;
-	cout << "class_id of demo5: " << d5->get_class_id() << endl;
-	delete d5;
+	invoke(d2, "set_age", 5);
+	invoke(d2, "set_time", 1000L);
+	invoke(d2, "set_woman", 1.5f);
+	invoke(d2, "set_man", 0.99);
+
+	invoke(d2, "print_age");
+	invoke(d2, "print_time");
+	invoke(d2, "print_woman");
+	invoke(d2, "print_man");
+
+	invoke(d3, "set_age", 5);
+	invoke(d3, "set_time", 1000L);
+	invoke(d3, "set_woman", 1.5f);
+	invoke(d3, "set_man", 0.99);
+
+	invoke(d3, "print_age");
+	invoke(d3, "print_time");
+	invoke(d3, "print_woman");
+	invoke(d3, "print_man");
 	
 
-
-	demo* da = new demo[2];
-	cout << da->get_class_id() << endl;
-
 	system("pause");
-
 }
 
 

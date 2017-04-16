@@ -35,5 +35,8 @@
     <ClInclude Include="pattern2\invoke.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="pattern2\micro.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

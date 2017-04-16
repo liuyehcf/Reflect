@@ -26,6 +26,7 @@
   <ItemGroup>
     <ClInclude Include="pattern2\demo.h" />
     <ClInclude Include="pattern2\invoke.h" />
+    <ClInclude Include="pattern2\micro.h" />
     <ClInclude Include="pattern2\object.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
