@@ -1,6 +1,6 @@
 #!/bin/bash
 
-description="version_"$(date +%Y)"_"$(date +%m)"_"$(date +%d)"("${1}")"
+description="version_"$(date +%Y)"_"$(date +%m)"_"$(date +%d)"_"${1}
 
 echo "## "${description} >> README.md
 
