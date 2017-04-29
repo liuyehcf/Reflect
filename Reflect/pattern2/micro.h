@@ -16,7 +16,7 @@ friend void invoke(const object* obj, const std::string& method_name, double par
 \
 friend void invoke(const object* obj, const std::string& method_name, void* param1); \
 \
-
+friend void invoke(const object* obj, const std::string& method_name, const std::string& param1); \
 /*--------------------------------------------------------------------------*/
 
 /*
@@ -74,11 +74,22 @@ const long class_type::class_id = ++object::class_id;
 
 
 /*--------------------------------------------------------------------------*/
-//注意，以下几个宏中几个固定字符:obj,method_name,param1
+//注意，以下几个宏中几个固定字符:class_name,obj,method_name,param1
+#define FACTORY_INVOKE_HEAD \
+if(class_name==""){\
+	;\
+}\
+
+#define FACTORY_INVOKE(class_type) \
+else if(#class_type==class_name){\
+	return class_type::new_instance();\
+}\
+
+
 /*
 * 类型判断开始
 */
-#define REGISTE_CLASS_START(class_type)\
+#define METHOD_INVOKE_CLASS_START(class_type)\
 if(class_id==class_type::class_id){\
 	class_type * __##class_type = (class_type*)obj;\
 	if (method_name == "") {\
@@ -88,7 +99,7 @@ if(class_id==class_type::class_id){\
 /*
 * 类型判断结束
 */
-#define REGISTE_CLASS_END(class_type)\
+#define METHOD_INVOKE_CLASS_END(class_type)\
 	else {\
 		throw std::logic_error("反射调用函数失败");\
 	}\
@@ -97,7 +108,7 @@ if(class_id==class_type::class_id){\
 /*
 * 零元函数判断及调用
 */
-#define REGISTE_METHOD_ZERO(class_type, method)\
+#define METHOD_INVOKE_ZERO_PARAM(class_type, method)\
 	else if(method_name == #method){\
 		__##class_type -> method();\
 	}
@@ -105,7 +116,9 @@ if(class_id==class_type::class_id){\
 /*
 * 一元函数判断及调用
 */
-#define REGISTE_METHOD_ONE(class_type, method)\
+#define METHOD_INVOKE_ONE_PARAM(class_type, method)\
 	else if(method_name == #method){\
 		__##class_type -> method(param1);\
 	}
+
+

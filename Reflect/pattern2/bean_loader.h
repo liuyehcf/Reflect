@@ -26,4 +26,6 @@ private:
 	void add_property(bean_definition* definition, const std::string s);
 
 	void add_dependency(bean_definition* definition, const std::string s);
+
+	void order_by_dependency(std::vector<bean_definition*>& definitions);
 };

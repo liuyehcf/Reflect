@@ -3,15 +3,31 @@
 #include<string>
 #include<assert.h>
 #include"object.h"
+#include"bean_loader.h"
+#include"bean_definition.h"
+
 
 /*
 * 容器类
 */
 class context {
 private:
+	/*
+	* 配置文件路径
+	*/
 	const std::string configuration_path;
 
+	/*
+	* bean映射字典
+	*/
 	std::unordered_map<std::string, object*> bean_map;
+
+	/*
+	* 配置文件加载器
+	*/
+	bean_loader* loader = nullptr;
+
+	std::vector<bean_definition*> bean_definitions;
 
 	/*
 	* 单例模式,私有化构造函数
@@ -19,17 +35,11 @@ private:
 private:
 	static context* __context;
 private:
-	context(const std::string& path) :configuration_path(path) {}
+	context(const std::string& path);
 public:
-	static void create_context(const std::string& path) {
-		static context _context = context(path);
-		__context = &_context;
-	}
-
-	static context* get_context() {
-		assert(__context != nullptr);
-		return __context;
-	}
+	~context();
+	static void create_context(const std::string& path);
+	static context* get_context();
 
 private:
 	/*

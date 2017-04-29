@@ -1,12 +1,17 @@
 #include<regex>
 #include<fstream>
 #include<iostream>
+#include<queue>
+#include<set>
+#include<map>
+#include<utility>
+#include<assert.h>
 #include"bean_loader.h"
 
 using namespace std;
 
 vector<bean_definition*> bean_loader::load() {
-	vector<bean_definition*> res;
+	vector<bean_definition*> definitions;
 
 	const regex BEAN_REGEX("<bean([^>]+)>([\\s\\S]*?)</bean>");
 
@@ -27,13 +32,18 @@ vector<bean_definition*> bean_loader::load() {
 		add_property(definition, content_info);
 		add_dependency(definition, content_info);
 
-		cout << definition->to_string() << endl;
-		system("pause");
+		definitions.push_back(definition);
 	}
 
-	return res;
-}
+	//根据依赖关系确定有向图访问顺序
+	order_by_dependency(definitions);
 
+	for (bean_definition* definition : definitions) {
+		cout << definition->to_string() << endl;
+	}
+
+	return definitions;
+}
 
 bean_definition* bean_loader::create_bean_definition(const std::string s) {
 	bean_definition* definition = new bean_definition();
@@ -61,9 +71,50 @@ void bean_loader::add_dependency(bean_definition* definition, const std::string 
 	}
 }
 
+void bean_loader::order_by_dependency(std::vector<bean_definition*>& definitions) {
+	map<string, bean_definition*> bean_map;
+	map<string, vector<string>> adj_map;
+	map<string, int> degree_map;
+	for (bean_definition* definition : definitions) {
+		string bean_id = definition->id;
+		assert(bean_map.insert({ bean_id,definition }).second);
+		for (string dependency : definition->dependencies) {
+			if (adj_map.find(dependency) == adj_map.end()) {
+				adj_map.insert({ dependency,{ bean_id } });
+			}
+			else {
+				assert(adj_map[dependency].size() > 0);
+				adj_map[dependency].push_back(bean_id);
+			}
+		}
+		assert(degree_map.insert({ bean_id,definition->dependencies.size() }).second);
+	}
+	queue<string> queue;
+	for (pair<string, int> key_value: degree_map){
+		if (key_value.second == 0) {
+			queue.push(key_value.first);
+		}
+	}
+	vector<bean_definition*> temp;
+	while (!queue.empty()) {
+		string bean_id = queue.front();
+		queue.pop();
 
-int main() {
-	bean_loader bl("E:\\CppProgram\\Reflect\\Reflect\\pattern2\\beans.xml");
-	bl.load();
-	system("pause");
+		bean_definition* definition = bean_map[bean_id];
+		temp.push_back(definition);
+		const vector<string>& adj_list = adj_map[bean_id];
+		for (string other_bean_id : adj_list) {
+			if (--degree_map[other_bean_id] == 0) {
+				queue.push(other_bean_id);
+			}
+		}
+	}
+	definitions.swap(temp);
 }
+
+
+//int main() {
+//	bean_loader bl("E:\\CppProgram\\Reflect\\Reflect\\pattern2\\beans.xml");
+//	bl.load();
+//	system("pause");
+//}

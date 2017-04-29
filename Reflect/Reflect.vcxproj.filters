@@ -33,6 +33,9 @@
     <ClCompile Include="pattern2\bean_definition.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="pattern2\config.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pattern2\object.h">
@@ -54,6 +57,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="pattern2\bean_loader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pattern2\config.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

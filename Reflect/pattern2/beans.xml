@@ -1,16 +1,14 @@
-<bean id="id1", class="class1">
-	<property name="age", value="19"/>
-	<property name="country", value="China"/>
-	<dependency ref-id="id2"/>
-	<dependency ref-id="id3"/>
+<bean id="gtt_config", class="gtt_highspeed_config">
+	<property name="road_length", value="300"/>
+	<property name="road_width", value="150"/>
+	<dependency ref-id="global_config"/>
 </bean>
 
 
-<bean id="id2", class="class2">
-	
+<bean id="global_config", class="global_control_config">
+	<property name="ntti", value="100"/>
 </bean>
 
 
-<bean id="id3", class="class3">
-	
-</bean>
+
+
