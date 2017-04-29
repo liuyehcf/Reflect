@@ -5,7 +5,7 @@
 using namespace std;
 
 
-int main() {
+static int main1() {
 	object *d1 = demo1::new_instance();
 	object *d2 = demo2::new_instance();
 	object *d3 = demo3::new_instance();

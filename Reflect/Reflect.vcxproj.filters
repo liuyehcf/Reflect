@@ -24,6 +24,15 @@
     <ClCompile Include="pattern2\demo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="pattern2\context.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pattern2\bean_loader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pattern2\bean_definition.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pattern2\object.h">
@@ -36,6 +45,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="pattern2\micro.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pattern2\context.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pattern2\bean_definition.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pattern2\bean_loader.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
