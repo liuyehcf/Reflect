@@ -21,16 +21,14 @@
   <ItemGroup>
     <ClCompile Include="pattern2\bean_definition.cpp" />
     <ClCompile Include="pattern2\bean_loader.cpp" />
-    <ClCompile Include="pattern2\config.cpp" />
     <ClCompile Include="pattern2\context.cpp" />
-    <ClCompile Include="pattern2\demo.cpp" />
+    <ClCompile Include="pattern2\invoke.cpp" />
     <ClCompile Include="pattern2\main.cpp" />
     <ClCompile Include="pattern2\object.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pattern2\bean_definition.h" />
     <ClInclude Include="pattern2\bean_loader.h" />
-    <ClInclude Include="pattern2\config.h" />
     <ClInclude Include="pattern2\context.h" />
     <ClInclude Include="pattern2\demo.h" />
     <ClInclude Include="pattern2\invoke.h" />

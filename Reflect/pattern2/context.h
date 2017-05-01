@@ -6,7 +6,6 @@
 #include"bean_loader.h"
 #include"bean_definition.h"
 
-
 /*
 * 容器类
 */
@@ -33,7 +32,7 @@ private:
 	* 单例模式,私有化构造函数
 	*/
 private:
-	static context* __context;
+	static context* singleton;
 private:
 	context(const std::string& path);
 public:
@@ -50,10 +49,27 @@ private:
 	/*
 	* 解析配置文件
 	*/
-	void parseConfiguration();
+	void parse_configuration();
 
 	/*
 	* 按照指定顺序初始化所有bean
 	*/
 	void create_and_init_bean();
+
+	/*
+	* 依赖注入
+	*/
+	void dependency_injection();
+
+	/*
+	* 预处理器
+	*/
+	void pre_process();
+
+	/*
+	* 后处理器
+	*/
+	void post_process();
+public:
+	object* get_bean(std::string bean_id);
 };

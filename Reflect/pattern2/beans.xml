@@ -1,13 +1,16 @@
-<bean id="gtt_config", class="gtt_highspeed_config">
-	<property name="road_length", value="300"/>
-	<property name="road_width", value="150"/>
-	<dependency ref-id="global_config"/>
+
+<bean id="demo", class="demo1">
+	<property name="age", value="100"/>
+	<property name="time", value="20909"/>
+	<property name="man", value="1.6"/>
+	<property name="woman", value="9.89"/>
+	
+	<pre-processor method_name="print_age"/>
+	<pre-processor method_name="print_time"/>
+	<pre-processor method_name="print_man"/>
+	<pre-processor method_name="print_woman"/>
 </bean>
 
-
-<bean id="global_config", class="global_control_config">
-	<property name="ntti", value="100"/>
-</bean>
 
 
 

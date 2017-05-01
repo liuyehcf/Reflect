@@ -1,4 +1,29 @@
 #pragma once
+#include<iostream>
+
+/*----------------------------------------------------------------------------
+* >>>>>>>>>>>>>>>>>>>>>>>>删除拷贝控制成员宏(START)<<<<<<<<<<<<<<<<<<<<<<<<<<<
+* ---------------------------------------------------------------------------*/
+/*
+* 将拷贝构造函数、移动构造函数、拷贝赋值运算符、移动赋值运算符定义为删除
+*/
+#define DELETE_COPY_MEMBER(class_type) \
+public:\
+class_type(){}\
+class_type(const class_type&) = delete;\
+class_type(class_type&&) = delete;\
+class_type& operator=(const class_type&) = delete;\
+class_type& operator=(class_type&&) = delete;\
+
+
+/*----------------------------------------------------------------------------
+* >>>>>>>>>>>>>>>>>>>>>>>>>删除拷贝控制成员宏(END)<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+* ---------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>bean类注册宏(START)<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+* ---------------------------------------------------------------------------*/
 
 /*
 * 友元声明
@@ -17,13 +42,15 @@ friend void invoke(const object* obj, const std::string& method_name, double par
 friend void invoke(const object* obj, const std::string& method_name, void* param1); \
 \
 friend void invoke(const object* obj, const std::string& method_name, const std::string& param1); \
-/*--------------------------------------------------------------------------*/
+\
+friend void invoke(const object* obj, const std::string& method_name, object* param1); \
+
 
 /*
 * 注册类型id的宏
 */
-#define REGISTE_CLASS_ID(class_type)\
-protected:\
+#define REGISTE_CLASS_ID_HEAD(class_type)\
+public:\
 	static const long class_id;\
 
 /*
@@ -60,8 +87,9 @@ private:
 * 该宏组合了上面几个宏，用于被反射的类进行注册
 */
 #define REGISTE_MEMBER_HEAD(class_type)\
+DELETE_COPY_MEMBER(class_type) \
 INVOKE_FRIEND_DECLARED \
-REGISTE_CLASS_ID(class_type) \
+REGISTE_CLASS_ID_HEAD(class_type) \
 REGISTE_FACTORY_METHOD(class_type) \
 OVERRIDE_OPERATOR_NEW(class_type) \
 OVERRIDE_OPERATOR_DELETE(class_type) \
@@ -69,20 +97,32 @@ OVERRIDE_OPERATOR_DELETE(class_type) \
 /*
 * 在源文件中初始化类型id
 */
-#define REGISTE_MEMBER_RESOURCE(class_type)\
+#define REGISTE_CLASS_ID_RESOURCE(class_type)\
 const long class_type::class_id = ++object::class_id;
 
+/*----------------------------------------------------------------------------
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>bean类注册宏(END)<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+* ---------------------------------------------------------------------------*/
 
-/*--------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------
+* >>>>>>>>>>>>>>>>>>>>>>>>>>反射方法注册宏(START)<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+* ---------------------------------------------------------------------------*/
 //注意，以下几个宏中几个固定字符:class_name,obj,method_name,param1
-#define FACTORY_INVOKE_HEAD \
+#define FACTORY_INVOKE_START \
 if(class_name==""){\
-	;\
+	return nullptr;\
 }\
 
 #define FACTORY_INVOKE(class_type) \
 else if(#class_type==class_name){\
 	return class_type::new_instance();\
+}\
+
+#define FACTORY_INVOKE_END \
+else {\
+	return nullptr;\
 }\
 
 
@@ -93,7 +133,9 @@ else if(#class_type==class_name){\
 if(class_id==class_type::class_id){\
 	class_type * __##class_type = (class_type*)obj;\
 	if (method_name == "") {\
-		throw std::logic_error("反射调用函数失败"); \
+		std::cout<<"反射方法名不能为空"<<std::endl;\
+		system("pause");\
+		exit(0);\
 	}
 
 /*
@@ -101,7 +143,9 @@ if(class_id==class_type::class_id){\
 */
 #define METHOD_INVOKE_CLASS_END(class_type)\
 	else {\
-		throw std::logic_error("反射调用函数失败");\
+		std::cout<<"方法<"<<#class_type<<"."<<method_name<<">尚未注册"<<std::endl;\
+        system("pause");\
+		exit(0);\
 	}\
 }
 
@@ -120,5 +164,10 @@ if(class_id==class_type::class_id){\
 	else if(method_name == #method){\
 		__##class_type -> method(param1);\
 	}
+
+
+/*----------------------------------------------------------------------------
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>反射方法注册宏(END)<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+* ---------------------------------------------------------------------------*/
 
 
