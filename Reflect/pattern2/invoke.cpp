@@ -3,6 +3,7 @@
 #include"demo.h"
 
 REGISTE_CLASS_ID_RESOURCE(demo1)
+REGISTE_CLASS_ID_RESOURCE(demo2)
 
 /*
 * ÁãÔªº¯Êý·´Éä×¢²á
@@ -10,6 +11,7 @@ REGISTE_CLASS_ID_RESOURCE(demo1)
 object* new_instance(const std::string& class_name) {
 	FACTORY_INVOKE_START
 		FACTORY_INVOKE(demo1)
+		FACTORY_INVOKE(demo2)
 		FACTORY_INVOKE_END
 }
 
@@ -23,7 +25,12 @@ void invoke(const object* obj, const std::string& method_name) {
 		METHOD_INVOKE_ZERO_PARAM(demo1, print_time)
 		METHOD_INVOKE_ZERO_PARAM(demo1, print_man)
 		METHOD_INVOKE_ZERO_PARAM(demo1, print_woman)
+		METHOD_INVOKE_ZERO_PARAM(demo1, init)
 		METHOD_INVOKE_CLASS_END(demo1)
+
+		METHOD_INVOKE_CLASS_START(demo2)
+		METHOD_INVOKE_ZERO_PARAM(demo2, init)
+		METHOD_INVOKE_CLASS_END(demo2)
 }
 
 /*
@@ -90,4 +97,12 @@ void invoke(const object* obj, const std::string& method_name, const std::string
 
 void invoke(const object* obj, const std::string& method_name, object* param1) {
 	long class_id = obj->get_class_id();
+
+	METHOD_INVOKE_CLASS_START(demo1)
+		METHOD_INVOKE_ONE_PARAM(demo1, set_demo2)
+		METHOD_INVOKE_CLASS_END(demo1)
+
+		METHOD_INVOKE_CLASS_START(demo2)
+		METHOD_INVOKE_ONE_PARAM(demo2, set_demo1)
+		METHOD_INVOKE_CLASS_END(demo2)
 }

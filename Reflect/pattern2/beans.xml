@@ -1,16 +1,25 @@
 
-<bean id="demo", class="demo1">
+<bean id="demo1", class="demo1">
 	<property name="age", value="100"/>
 	<property name="time", value="20909"/>
 	<property name="man", value="1.6"/>
 	<property name="woman", value="9.89"/>
+	<property name="demo2", ref-id="demo2"/>
 	
 	<pre-processor method_name="print_age"/>
 	<pre-processor method_name="print_time"/>
 	<pre-processor method_name="print_man"/>
 	<pre-processor method_name="print_woman"/>
+	
+	<post-processor method_name="init"/>
 </bean>
 
+
+<bean id="demo2", class="demo2">
+	<dependency name="demo1", ref-id="demo1"/>
+
+	<post-processor method_name="init"/>
+</bean>
 
 
 

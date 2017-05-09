@@ -4,6 +4,8 @@
 #include<string>
 #include<iostream>
 
+class demo2;
+
 class demo1 :public object {
 	/*
 	* 要实现反射必须进行注册
@@ -43,5 +45,34 @@ private:
 	}
 	void print_man() {
 		std::cout << "demo1's man: " << this->man << std::endl;
+	}
+
+private:
+	demo2* _demo2 = nullptr;
+	void set_demo2(object* t_demo2) {
+		_demo2 = (demo2*)t_demo2;
+	}
+
+private:
+	void init() {
+		std::cout << "demo1's init" << std::endl;
+	}
+};
+
+class demo2 :public object {
+	/*
+	* 要实现反射必须进行注册
+	*/
+	REGISTE_MEMBER_HEAD(demo2)
+
+private:
+	demo1* _demo1 = nullptr;
+	void set_demo1(object* t_demo1) {
+		_demo1 = (demo1*)t_demo1;
+	}
+
+private:
+	void init() {
+		std::cout << "demo2's init" << std::endl;
 	}
 };
